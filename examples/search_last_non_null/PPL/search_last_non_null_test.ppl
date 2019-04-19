@@ -1,0 +1,36 @@
+record type customer
+    attributes
+        name string
+        address address or null
+    .
+.
+
+record type address
+    attributes
+        city string or null
+        country string
+    .
+.
+
+function customer_city_size ( customer ) -> zero_pos_32 =
+    customer.address.null?.city.null?.size if_null: 0
+    
+function customer_city_size_2 ( customer ) -> zero_pos_32 =
+    customer.address?.city?.size if_null: 0
+
+function start
+
+    // city is non-null
+    const address1 = address.create ( city = "Orlando", country = "USA" )
+    const customer1 = customer.create ( name = "Foo", address = address1 )
+    write_line ( customer_city_size ( customer1 ).to_string )
+
+    // city is null
+    const address2 = address.create ( city = null, country = "USA" )
+    const customer2 = customer.create ( name = "Foo", address = address2 )
+    write_line ( customer_city_size ( customer2 ).to_string )
+
+    // address is null
+    const customer3 = customer.create ( name = "Foo", address = null )
+    write_line ( customer_city_size ( customer3 ).to_string )
+.

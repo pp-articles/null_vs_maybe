@@ -1,0 +1,7 @@
+/text/
+/images/
+/image_creator/
+*.exe
+*.hi
+*.o
+*.class

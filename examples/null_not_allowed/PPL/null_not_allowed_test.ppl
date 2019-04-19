@@ -1,0 +1,15 @@
+function int_to_string ( i pos_32 ) -> string = \
+    if i =v 1 then "one" else "not one"
+
+function int_to_string2 ( i pos_32 ) -> string
+    if i =v 1 then
+        return "one"
+    else
+        return "not one"
+    .
+.
+
+function start
+    write_line ( int_to_string ( 1 ) )
+    write_line ( int_to_string ( 2 ) )
+.

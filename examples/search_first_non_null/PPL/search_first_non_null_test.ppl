@@ -1,0 +1,25 @@
+function discount_from_net ( customer_id string ) -> float_64 or null = \
+    if customer_id =v "Net" then 10.0 else null
+
+function discount_from_DB ( customer_id string ) -> float_64 or null = \
+    if customer_id =v "DB" then 7.0 else null
+
+function discount_from_cache ( customer_id string ) -> float_64 or null = \
+    if customer_id =v "Cache" then 5.0 else null
+
+function customer_discount ( customer_id string ) -> float_64 = \
+    discount_from_net ( customer_id ) \
+    if_null: discount_from_DB ( customer_id ) \
+    if_null: discount_from_cache ( customer_id ) \
+    if_null: 0.0
+
+function run_test ( customer_id string )
+    write_line ( """{{customer_id}}: {{customer_discount ( customer_id ).to_string}}""" )
+.
+
+function start
+    run_test ( "Net" )
+    run_test ( "DB" )
+    run_test ( "Cache" )
+    run_test ( "Foo" )
+.
